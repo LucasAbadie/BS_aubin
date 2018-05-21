@@ -56,13 +56,7 @@ public class AIEasy extends Player {
 	@Override
 	public Coord prepareShoot(Player e) {
 		
-		String shoot;
-		Random r = new Random();
-
-		char row = (char) (r.nextInt(10) + 'A');
-        int col = (int) (r.nextInt(10) + 1);
-        
-		shoot = row + Integer.toString(col);
+		String shoot = this.createShoot();
 
 		return new Coord(shoot);
 	}

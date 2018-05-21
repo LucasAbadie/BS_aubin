@@ -1,5 +1,6 @@
 package abadie.aubin;
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Player implements IPlayer {
 
@@ -172,5 +173,17 @@ public abstract class Player implements IPlayer {
 		}
 		
 		System.out.println();
+	}
+	
+	protected String createShoot() {
+		String shoot;
+		Random r = new Random();
+
+		char row = (char) (r.nextInt(10) + 'A');
+        int col = (int) (r.nextInt(10) + 1);
+        
+		shoot = row + Integer.toString(col);
+		
+		return shoot;
 	}
 }
