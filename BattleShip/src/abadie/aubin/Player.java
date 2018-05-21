@@ -32,30 +32,39 @@ public abstract class Player implements IPlayer {
 		this.hasHitShip = hasHitShip;
 	}
 	
-	public boolean isValidShip(Ship s, Coord start, Coord end) {
+	public boolean isValidShip(Ship s, Coord start, int direction) {
+		
+		//System.out.println("\nShip " + s.getSize() + ": " + start.toString()+ ", " + direction);
 		
 		if (!(start.getX() >= 'A' && start.getX() <= 'J' && start.getY() >= 1 && start.getY() <= 10)) {
 			System.out.println("Invalid coordinates, please retry...\n");
 			return false;
 		}
 		
-		if (isConflictShipCoord(s)) {
-			return false;
+		//System.out.println("Coord correctes");
+		
+		for(int i = 0 ; i < s.getSize() ; i++) {
+			if(direction == 0) {
+				if (isConflictShipCoord(new Coord((char)(start.getX() + i) + Integer.toString(start.getY())))) {
+					return false;
+				}
+			} else {
+				if (isConflictShipCoord(new Coord(start.getX() + Integer.toString(start.getY() + i)))) {
+					return false;
+				}
+			}
 		}
+		//System.out.println("Pas de conflits");
 		
 		return true;
 	}
 	
-	public boolean isConflictShipCoord(Ship s) {
+	public boolean isConflictShipCoord(Coord c) {
 		
-		for (Ship sh : this.ships) {
-			for (Coord sq : sh.getSquares()) {
-				for(Coord sq2 : s.getSquares()) {
-					if (sq != null && sq.equals(sq2)) {
-						return true;
-					}
-				}	
-			}
+		//System.out.print("isConflictShipCoord: " + c.toString());
+		//System.out.println(this.isShipAtCoord(c));
+		if(this.isShipAtCoord(c)) {
+			return true;
 		}
 		
 		return false;
@@ -63,7 +72,9 @@ public abstract class Player implements IPlayer {
 	
 	public boolean isShipAtCoord(Coord c) {
 		
-		for (Ship s : this.ships) {
+		//System.out.println("isShipAtCoord : " + c.toString());
+		
+		for (Ship s : this.getShips()) {
 			for (Coord sq : s.getSquares()) {
 				if (sq != null && sq.equals(c)) {
 					return true;
@@ -88,13 +99,8 @@ public abstract class Player implements IPlayer {
 	}
 	
 	public boolean hasHitAtCoord(Coord c) {
-		for(Coord h : this.getShoots()) {
-			if(h.equals(c)) {
-				return true;
-			}
-		}
 		
-		return false;
+		return this.getShoots().contains(c);
 	}
 	
 	public void hitShip(Ship s, Coord c) {

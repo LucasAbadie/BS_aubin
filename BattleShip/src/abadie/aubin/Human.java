@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class Human extends Player {
 	
+	/**
+	 * Constructor
+	 */
 	public Human() {
 		
 		this.ships = new Ship[nbShips];
@@ -16,6 +19,9 @@ public class Human extends Player {
 		this.shoots = new ArrayList<Coord>();
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void initializeShips() {
 		
@@ -43,13 +49,13 @@ public class Human extends Player {
 				System.out.print("Direction of ship (0-V ou 1-H): ");
                 direction = reader.nextInt();
                 
+                validShip = this.isValidShip(s, start, direction);
+                
                 if (direction == 0) {
                 	end = new Coord(colStart + Integer.toString(rowStart + s.getSize() - 1));
                 } else {
                 	end = new Coord((char)(colStart + s.getSize() - 1) + Integer.toString(rowStart));
                 }
-
-                validShip = this.isValidShip(s, start, end);
 			}
 			
 			s.setSquares(start, end, direction);

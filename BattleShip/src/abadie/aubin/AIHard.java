@@ -29,7 +29,7 @@ public class AIHard extends Player {
 				
 				Random r = new Random();
 				
-				direction = (r.nextInt(10 - 1 + 1) + 1) % 2;
+				direction = r.nextInt(2);
 				
 				char rowStart;
 				int colStart;
@@ -38,15 +38,15 @@ public class AIHard extends Player {
 					rowStart = (char) (r.nextInt(10 - s.getSize() + 1) + 'A');
 					colStart = r.nextInt(10) + 1;
 					start = new Coord(rowStart + Integer.toString(colStart));
+					validShip = this.isValidShip(s, start, direction);
 					end = new Coord((char)(rowStart + s.getSize() - 1) + Integer.toString(colStart));
 				} else {
-					rowStart = (char) (r.nextInt((10 + 1) + 'A'));
+					rowStart = (char) (r.nextInt(11) + 'A');
 					colStart = r.nextInt(10 - s.getSize() + 1) + 1;
 					start = new Coord(rowStart + Integer.toString(colStart));
+					validShip = this.isValidShip(s, start, direction);
 					end = new Coord(rowStart + Integer.toString(colStart + s.getSize() - 1));
 				}
-
-                validShip = this.isValidShip(s, start, end);
 			}
 			
 			s.setSquares(start, end, direction);
