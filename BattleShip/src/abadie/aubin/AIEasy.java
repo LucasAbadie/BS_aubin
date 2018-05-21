@@ -56,7 +56,7 @@ public class AIEasy extends Player {
 	@Override
 	public Coord prepareShoot(Player e) {
 		
-		String shoot = this.createShoot();
+		String shoot = this.createShootInAllGrid();
 
 		return new Coord(shoot);
 	}

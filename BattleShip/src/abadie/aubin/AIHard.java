@@ -56,6 +56,62 @@ public class AIHard extends Player {
 	@Override
 	public Coord prepareShoot(Player e) {
 		
-		return null;
+		String shoot;
+
+		if(this.shoots.isEmpty()) {			
+			shoot = this.createShootInAllGrid();
+		}
+		else {
+			if(this.isHasHitShip()) {	
+				shoot = this.createShoot();
+			} else {
+				do {
+					shoot = this.createShootInAllGrid();
+				}while(this.hasHitAtCoord(new Coord(shoot)));
+			}
+		}
+
+		return new Coord(shoot);
+	}
+	
+	protected String createShoot() {
+		
+		String shoot;
+		Random r = new Random();
+		int index = this.shoots.size() - 1; // take the last save shoot position
+		String lastShootPos = this.shoots.get(index).toString(); // Get the value of the last save shoot position
+
+		char rowLetter = lastShootPos.charAt(0);
+		int colNumber = Integer.parseInt(lastShootPos.substring(1, lastShootPos.length()));
+		
+		char row;
+		int col;
+		
+		// Get the new shoot position with cross method
+		do {
+			if(rowLetter == 'A') {
+				row = (char) (r.nextInt(2) + rowLetter);
+			} else if(rowLetter == 'J') {
+				row = (char) (r.nextInt(2) + (rowLetter - 1));
+			} else {			
+				row = (char) (r.nextInt(3) + (rowLetter - 1));
+			}
+			
+			if(row == rowLetter) {
+				if(colNumber == 1) {
+					col = colNumber + 1;
+				} else if(colNumber == 10) {
+					col = colNumber - 1;
+				} else {
+					col = (r.nextInt(2) != 0) ? colNumber + 1 : colNumber - 1;
+				}
+			} else {
+				col = colNumber;
+			}
+			
+			shoot = row + Integer.toString(col);
+		}while(this.hasHitAtCoord(new Coord(shoot)));
+		
+		return shoot;
 	}
 }

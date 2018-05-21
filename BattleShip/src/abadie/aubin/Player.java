@@ -9,6 +9,8 @@ public abstract class Player implements IPlayer {
 
 	protected Ship ships[];
 	protected ArrayList<Coord> shoots;
+	
+	protected boolean hasHitShip = false;
 
 	public Ship[] getShips() {
 		return ships;
@@ -20,6 +22,14 @@ public abstract class Player implements IPlayer {
 	
 	public ArrayList<Coord> getShoots() {
 		return shoots;
+	}
+	
+	public boolean isHasHitShip() {
+		return hasHitShip;
+	}
+	
+	public void setHasHitShip(boolean hasHitShip) {
+		this.hasHitShip = hasHitShip;
 	}
 	
 	public boolean isValidShip(Ship s, Coord start, Coord end) {
@@ -88,6 +98,9 @@ public abstract class Player implements IPlayer {
 	}
 	
 	public void hitShip(Ship s, Coord c) {
+		
+		if(!this.isHasHitShip())
+			this.setHasHitShip(true);
 
 		for (Coord sq : s.getSquares()) {
 			if (sq.equals(c)) {
@@ -175,7 +188,7 @@ public abstract class Player implements IPlayer {
 		System.out.println();
 	}
 	
-	protected String createShoot() {
+	protected String createShootInAllGrid() {
 		String shoot;
 		Random r = new Random();
 

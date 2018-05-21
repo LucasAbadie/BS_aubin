@@ -59,19 +59,12 @@ public class AIMedium extends Player {
 		String shoot;
 
 		if(this.shoots.isEmpty()) {
-			shoot = this.createShoot();
-			System.out.println("first shoot IA");
+			shoot = this.createShootInAllGrid();
 		}
 		else {
-			System.out.println("okok");
-			shoot = this.createShoot();
-			/*do {
-				shoot = this.createShoot();
-				if(this.shoots.contains(new Coord(shoot)))
-					System.out.println(shoot + " is contain into array list");
-					
-			}while(this.shoots.contains(new Coord(shoot)));
-			System.out.println("IA shoot at " + shoot);*/
+			do {
+				shoot = this.createShootInAllGrid();
+			}while(this.hasHitAtCoord(new Coord(shoot)));
 		}
 
 		return new Coord(shoot);

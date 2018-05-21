@@ -152,10 +152,16 @@ public class BattleShip {
 				System.out.println("Hit in " + shoot.toString());
 				p.hitShip(s, shoot);
 				if (s.isDestroyed()) {
+					if(p.isHasHitShip())
+						p.setHasHitShip(false);
+					
 					System.out.println("Hit and sank!");
 				}
 			}
-		} else {
+		} else {		
+			if(p.isHasHitShip())
+				p.setHasHitShip(false);
+			
 			if(!p.getShoots().isEmpty()) {
 				if(p.getShoots().contains(shoot)) {
 					System.out.println("Already hit " + shoot.toString());
