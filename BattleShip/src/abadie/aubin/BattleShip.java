@@ -157,14 +157,11 @@ public class BattleShip {
 			}
 		} else {
 			if(!p.getShoots().isEmpty()) {
-				for(Coord c : p.getShoots()) {
-					if(c.equals(shoot)) {
-						System.out.println("Already hit " + shoot.toString());
-						break;
-					} else {
-						System.out.println("Miss in " + shoot.toString());
-						p.addShoot(shoot);
-					}
+				if(p.getShoots().contains(shoot)) {
+					System.out.println("Already hit " + shoot.toString());
+				} else {
+					System.out.println("Miss in " + shoot.toString());
+					p.addShoot(shoot);
 				}
 			} else {
 				System.out.println("Miss in " + shoot.toString());
