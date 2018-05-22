@@ -11,9 +11,9 @@ public class BattleShip {
 		
 		Player p1;
 		Player p2;
-		int round = 0;// rounds number 
-		int p1Score = 0;// p1's wins count
-		int p2Score = 0;// p1's wins count
+		int round = 0; // rounds number 
+		int p1Score = 0; // p1's wins count
+		int p2Score = 0; // p1's wins count
 		int gameMode = 0; // 0 : Human vs Human 
 						  // 1 : Human vs IA
 		int difficulty = -1; // 0 : Easy 
@@ -111,31 +111,42 @@ public class BattleShip {
 				if(first == 0) {
 					System.out.println("\nPlayer, which target?");
 					shoot(p1, p2, p1.prepareShoot(p2));
+					if (p1.hasLost()) {
+						System.out.println("Joueur 2 l'emporte !");
+						p2Score++;
+						break;
+					}
 					
 					System.out.println("\nAI is choosing target...");
 					shoot(p2, p1, p2.prepareShoot(p1));
+					if (p2.hasLost()) {
+						System.out.println("Joueur 1 l'emporte !");
+						p1Score++;
+						break;
+					}
 				} else {
 					System.out.println("\nAI is choosing target...");
 					shoot(p2, p1, p2.prepareShoot(p1));
+					if (p1.hasLost()) {
+						System.out.println("Joueur 2 l'emporte !");
+						p2Score++;
+						break;
+					}
 					
 					System.out.println("\nPlayer, which target?");
 					shoot(p1, p2, p1.prepareShoot(p2));
-				}
-
-				// Check if game is done
-				if (p1.hasLost()) {
-					System.out.println("Joueur 2 l'emporte !");
-					p2Score++;
-					break;
-				} else if (p2.hasLost()) {
-					System.out.println("Joueur 1 l'emporte !");
-					p1Score++;
-					break;
+					if (p2.hasLost()) {
+						System.out.println("Joueur 1 l'emporte !");
+						p1Score++;
+						break;
+					}
 				}
 			}
 			
 			// Choose replay or not
 			while (true) {
+				
+				System.out.println(round);
 				
 				System.out.println("Want to replay? " + "\n YES (y) or NO (n)");
 				String replay = reader.nextLine().toUpperCase();
@@ -144,7 +155,7 @@ public class BattleShip {
 					System.out.println("Invalid...");
 				}
 				else {
-					if(!replay.equals("YES") || !replay.equals("Y")) {
+					if(replay.equals("YES") || replay.equals("Y")) {
 						round++;
 					} else {
 						System.out.println("Thanks for playing!");

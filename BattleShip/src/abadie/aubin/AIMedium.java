@@ -41,7 +41,7 @@ public class AIMedium extends Player {
 					validShip = this.isValidShip(s, start, direction);
 					end = new Coord((char)(rowStart + s.getSize() - 1) + Integer.toString(colStart));
 				} else {
-					rowStart = (char) (r.nextInt(11) + 'A');
+					rowStart = (char) (r.nextInt(10) + 'A');
 					colStart = r.nextInt(10 - s.getSize() + 1) + 1;
 					start = new Coord(rowStart + Integer.toString(colStart));
 					validShip = this.isValidShip(s, start, direction);

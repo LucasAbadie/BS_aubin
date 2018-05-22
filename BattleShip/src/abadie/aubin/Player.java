@@ -37,7 +37,7 @@ public abstract class Player implements IPlayer {
 		//System.out.println("\nShip " + s.getSize() + ": " + start.toString()+ ", " + direction);
 		
 		if (!(start.getX() >= 'A' && start.getX() <= 'J' && start.getY() >= 1 && start.getY() <= 10)) {
-			System.out.println("Invalid coordinates, please retry...\n");
+			System.out.println("Invalid coordinates, please retry..." + start.toString() + "\n");
 			return false;
 		}
 		
