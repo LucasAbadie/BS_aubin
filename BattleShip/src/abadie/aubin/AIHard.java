@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class AIHard extends Player {
 	
+	int testCptMax = 100;
+	
 	public AIHard() {
 		this.ships = new Ship[nbShips];
 
@@ -86,6 +88,7 @@ public class AIHard extends Player {
 		
 		char row;
 		int col;
+		int testCpt = 0;
 		
 		// Get the new shoot position with cross method
 		do {
@@ -110,7 +113,14 @@ public class AIHard extends Player {
 			}
 			
 			shoot = row + Integer.toString(col);
-		}while(this.hasHitAtCoord(new Coord(shoot)));
+			testCpt++;
+		}while(this.hasHitAtCoord(new Coord(shoot)) && testCpt < this.testCptMax);
+		
+		if(testCpt >= this.testCptMax) {
+			do {
+				shoot = this.createShootInAllGrid();
+			}while(this.hasHitAtCoord(new Coord(shoot)));
+		}
 		
 		return shoot;
 	}

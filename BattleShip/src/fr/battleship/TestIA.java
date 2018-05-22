@@ -116,15 +116,15 @@ public class TestIA {
 		if(e.isShipAtCoord(shoot) ) {
 			Ship s = e.getShipAtCoord(shoot);
 			if (s.isHit(shoot)) {
-				//System.out.println("Already hit " + shoot.toString());
+				//System.out.println(p.toString() + " Already hit " + shoot.toString());
 			} else {
-				//System.out.println("Hit in " + shoot.toString());
+				//System.out.println(p.toString() + " Hit in " + shoot.toString());
 				p.hitShip(s, shoot);
 				if (s.isDestroyed()) {
 					if(p.isHasHitShip())
 						p.setHasHitShip(false);
 					
-					//System.out.println("Hit and sank!");
+					//System.out.println(p.toString() + " Hit and sank!");
 				}
 			}
 		} else {		
@@ -133,13 +133,13 @@ public class TestIA {
 			
 			if(!p.getShoots().isEmpty()) {
 				if(p.hasHitAtCoord(shoot)) {
-					//System.out.println("Already hit " + shoot.toString());
+					//System.out.println(p.toString() + " Already hit " + shoot.toString());
 				} else {
-					//System.out.println("Miss in " + shoot.toString());
+					//System.out.println(p.toString() + " Miss in " + shoot.toString());
 					p.addShoot(shoot);
 				}
 			} else {
-				//System.out.println("Miss in " + shoot.toString());
+				//System.out.println(p.toString() + " Miss in " + shoot.toString());
 				p.addShoot(shoot);
 			}
 		}
